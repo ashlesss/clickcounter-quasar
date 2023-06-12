@@ -2,7 +2,7 @@
   "name": "clickcounter",
   "version": "0.0.1",
   "description": "Click counter developed with Quasar",
-  "productName": "c_counter",
+  "productName": "Click counter",
   "author": "ashlesss <hidahza@gmail.com>",
   "private": true,
   "scripts": {

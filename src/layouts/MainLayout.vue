@@ -1,13 +1,16 @@
 <template>
   <q-layout view="hHh lpR fFf">
-  
-      <q-header reveal elevated class="bg-primary text-white">
+      <q-header reveal elevated v-bind:class="headerClass">
         <q-toolbar>
           <q-btn dense flat round icon="menu" @click="drawerOpen = !drawerOpen" />
   
           <q-toolbar-title>
             Click Counter
           </q-toolbar-title>
+
+          <div>
+            <q-btn flat round color="white" icon="dark_mode" @click="toggleDark"/>
+          </div>
         </q-toolbar>
       </q-header>
 
@@ -69,15 +72,43 @@
 
 <script>
 import { defineComponent, ref } from 'vue'
+import { useQuasar } from 'quasar'
 
 export default defineComponent({
   name: 'MainLayout',
 
-  setup () {
+  setup() {
+    const $q = useQuasar();
+  },
+
+  data() {
     return {
       drawerOpen: ref(false),
-      miniState: ref(true)
+      miniState: ref(true),
+      isDarkActive: false,
     }
   },
+
+  computed: {
+    headerClass() {
+      return {
+        'bg-primary text-white': !this.isDarkActive,
+        'bg-dark text-white': this.isDarkActive
+      }
+    }
+  },
+
+  methods: {
+    toggleDark() {
+      if (this.$q.dark.isActive == false && this.$q.dark.mode == false) {
+        this.$q.dark.set(true);
+        this.isDarkActive = true;
+      }
+      else {
+        this.$q.dark.set(false);
+        this.isDarkActive = false;
+      }
+    }
+  }
 })
 </script>

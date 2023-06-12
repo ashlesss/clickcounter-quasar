@@ -18,7 +18,7 @@
     <div class="flex flex-center q-mt-xs">
         <q-btn 
         size="40px"
-        style="width: 100%; background-color: #198754;" 
+        :style="mainBtnStyle" 
         text-color="white" 
         padding="none"
         label="+" 
@@ -27,7 +27,7 @@
     <div class="flex flex-center q-mt-xs">
         <q-btn 
         size="25px"
-        style="width: 100%; background-color: #198754;" 
+        :style="mainBtnStyle" 
         text-color="white" 
         padding="none"
         label="-"
@@ -35,50 +35,50 @@
     </div>
     <div class="row q-mt-xs">
         <q-btn 
-        style="flex-grow:1; background-color: #198754; max-width: 50%" 
+        :style="smDuoBtnStyle" 
         text-color="white" 
         label="+100"
         @click="plus100" />
         <q-btn 
-        style="flex-grow:1; background-color: #198754; max-width: 50%" 
+        :style="smDuoBtnStyle" 
         text-color="white" 
         label="-100"
         @click="min100" />
     </div>
     <div class="row q-mt-xs">
         <q-btn 
-        style="flex-grow:1; background-color: #198754; max-width: 50%" 
+        :style="smDuoBtnStyle" 
         text-color="white" 
         label="-00"
         @click="min00" />
         <q-btn 
-        style="flex-grow:1; background-color: #198754; max-width: 50%" 
+        :style="smDuoBtnStyle" 
         text-color="white" 
         label="-0"
         @click="min0" />
     </div>
     <div class="row q-mt-xs">
         <q-btn 
-        style="flex-grow:1; background-color: #198754; max-width: 50%;" 
+        :style="saveBtn" 
         text-color="white" 
         label="Save Number"
         @click="saveNum" />
         <q-btn 
-        style="flex-grow:1; background-color: #198754; max-width: 50%;" 
+        :style="saveBtn" 
         text-color="white" 
         label="To save"
         @click="toSave" />
     </div>
     <div class="row q-mt-xs">
         <q-btn 
-        style="width: 100%; background-color: #198754;" 
+        :style="mainBtnStyle" 
         text-color="white" 
         label="Reset"
         @click="reset" />
     </div>
     <div class="row q-mt-xs">
         <q-btn  
-        style="width: 100%; background-color: #198754;" 
+        :style="mainBtnStyle" 
         text-color="white" 
         label="Reset Saved"
         @click="resSave" />
@@ -87,9 +87,14 @@
 
 <script>
 import { defineComponent, ref } from 'vue';
+import { useQuasar } from 'quasar'
 
 export default defineComponent({
     name: 'AllBtns',
+
+    setup() {
+        const $q = useQuasar();
+    },
 
     // setup() {
     //     return {
@@ -101,6 +106,35 @@ export default defineComponent({
         return {
             model: ref(0),
             savedNum: 0,
+        }
+    },
+
+    computed: {
+        smDuoBtnStyle() {
+            if (this.$q.dark.isActive == true) {
+                return 'flex-grow:1; background-color: #464646; max-width: 50%';
+            }
+            else {
+                return 'flex-grow:1; background-color: #198754; max-width: 50%';
+            }
+        },
+
+        mainBtnStyle() {
+            if (this.$q.dark.isActive == true) {
+                return 'width: 100%; background-color: #464646;';
+            }
+            else {
+                return 'width: 100%; background-color: #198754;';
+            }
+        },
+
+        saveBtn() {
+            if (this.$q.dark.isActive == true) {
+                return 'flex-grow:1; background-color: #464646; max-width: 50%;';
+            }
+            else {
+                return 'flex-grow:1; background-color: #198754; max-width: 50%;';
+            }
         }
     },
 

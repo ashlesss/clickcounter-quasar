@@ -4,7 +4,7 @@ const routes = [
     path: '/',
     component: () => import('layouts/MainLayout.vue'),
     children: [
-      { path: '', component: () => import('pages/IndexPage.vue') },
+      { path: '', component: () => import('pages/IntroPage.vue') },
       { path: '/click_counter', component: () => import('pages/ClickCounter.vue') }
     ]
   },
